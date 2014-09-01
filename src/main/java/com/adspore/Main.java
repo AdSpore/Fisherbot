@@ -13,6 +13,7 @@ public class Main {
 
     public static final String SERVICE = "lighthouse.seattle1.adspore.com";
     public static final String ADSPORE_NAMESPACE = "http://adspore.com/v1/lighthouse";
+    public static final int WANDER_STEP_COUNT = 20;
 
 
     public static void main(String[] args) {
@@ -45,17 +46,20 @@ public class Main {
         CountDownLatch finished = bot.startWalking();
         try {
             finished.await();
+            Thread.sleep(3000);
         } catch (InterruptedException e) {
             LOG.warn("Should not be getting interrupted");
         }
 
-        bot.removeAccount();
+
 
         try {
+            bot.removeAccount();
+            Thread.sleep(5000);
             helper.mConnection.disconnect();
         } catch (SmackException.NotConnectedException e) {
             LOG.error("NOT CONNECTED EXCEPTION", e);
-        }
+        } catch (InterruptedException e) {}
     }
 
 

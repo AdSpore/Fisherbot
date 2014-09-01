@@ -202,7 +202,7 @@ public class Bot implements PacketListener {
 
 
     public CountDownLatch startWalking() {
-        mRunnable = new LocationUpdateRunnable(200);
+        mRunnable = new LocationUpdateRunnable(Main.WANDER_STEP_COUNT);
         return mRunnable.getLatch();
     }
 
@@ -242,7 +242,6 @@ public class Bot implements PacketListener {
         public void run() {
 
             while (mSteps.getCount() > 0) {
-                mSteps.countDown();
                 Point next = calculateNextPosition();
                 LOG.info("Calculated next posn:" + next.toText());
                 if (null != mAccountInfo) {
@@ -263,6 +262,7 @@ public class Bot implements PacketListener {
                 } catch (InterruptedException e) {
                     LOG.error("Shouldn't be geting interrupted...");
                 }
+                mSteps.countDown();
             }
         }
 
