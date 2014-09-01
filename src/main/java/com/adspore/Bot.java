@@ -6,6 +6,7 @@ import org.geotools.referencing.GeodeticCalculator;
 import org.jivesoftware.smack.*;
 import org.jivesoftware.smack.filter.PacketFilter;
 import org.jivesoftware.smack.packet.IQ;
+import org.jivesoftware.smack.packet.Message;
 import org.jivesoftware.smack.packet.Packet;
 import org.jivesoftware.smack.provider.ProviderManager;
 import org.jivesoftware.smack.tcp.XMPPTCPConnection;
@@ -25,6 +26,7 @@ public class Bot implements PacketListener {
 
     public GeometryFactory mGeometryFactory = new GeometryFactory(new PrecisionModel(), 4326);
 
+    private AccountIQ mAccountInfo;
 
     /*
             INITIAL BOUNDRY AREA FOR THIS BOT...
@@ -195,16 +197,13 @@ public class Bot implements PacketListener {
 
     @Override
     public void processPacket(Packet packet) throws SmackException.NotConnectedException {
-        if (packet instanceof IQ) {
-            LOG.info("Received IQ:" + packet.toString());
-        }
+        mAccountInfo = (AccountIQ) packet;
     }
 
     private class AcceptEverythingPacketFilter implements PacketFilter {
         @Override
         public boolean accept(Packet packet) {
-            LOG.info("Checking packet:" + packet.toString());
-            return true;
+            return (packet instanceof AccountIQ);
         }
     }
 
@@ -234,7 +233,19 @@ public class Bot implements PacketListener {
                 mSteps.countDown();
                 Point next = calculateNextPosition();
                 LOG.info("Calculated next posn:" + next.toText());
-                //  Send next point as message...
+                if (null != mAccountInfo) {
+                    Message toSend = new Message();
+                    toSend.setTo(Main.SERVICE);
+                    toSend.setFrom(mConnection.getUser());
+                    LocationMessage location = new LocationMessage(mAccountInfo.objectid, next.getX(), next.getY(), 3.1415927);
+                    toSend.addExtension(location);
+                    try {
+                        mConnection.sendPacket(toSend);
+                    } catch (SmackException.NotConnectedException e) {
+                        LOG.error("Caught Not Connected Exception!", e);
+                    }
+                }
+
                 try {
                     Thread.sleep(2000);
                 } catch (InterruptedException e) {
