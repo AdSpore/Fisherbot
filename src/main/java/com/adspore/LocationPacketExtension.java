@@ -7,14 +7,14 @@ import org.jivesoftware.smack.packet.PacketExtension;
 /**
  * Created by ddevine on 8/31/14.
  */
-public class LocationMessage implements PacketExtension {
+public class LocationPacketExtension implements PacketExtension {
 
     private final double latitude;
     private final double longitude;
     private final double accuracy;
     private final long objectid;
 
-    public LocationMessage(Long objectid, double longitude, double latitude, double accuracy) {
+    public LocationPacketExtension(Long objectid, double longitude, double latitude, double accuracy) {
         this.objectid = objectid;
         this.longitude = longitude;
         this.latitude = latitude;

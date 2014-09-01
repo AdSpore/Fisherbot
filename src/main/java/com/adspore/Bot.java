@@ -138,6 +138,18 @@ public class Bot implements PacketListener {
         return bot;
     }
 
+    public void removeAccount() {
+        AccountManager manager = AccountManager.getInstance(mConnection);
+        try {
+            manager.deleteAccount();
+        } catch (SmackException.NoResponseException e) {
+            LOG.error("NoResponseException", e);
+        } catch (XMPPException.XMPPErrorException e) {
+            LOG.error("XMPP ERROR EXCEPTION", e);
+        } catch (SmackException.NotConnectedException e) {
+            LOG.error("NOT CONNECTED EXCEPTION", e);
+        }
+    }
 
     public void addProviders() {
         ProviderManager.addIQProvider("account", "http://adspore.com/v1/lighthouse", new AccountIQ.AccountIQProvider());
@@ -237,7 +249,7 @@ public class Bot implements PacketListener {
                     Message toSend = new Message();
                     toSend.setTo(Main.SERVICE);
                     toSend.setFrom(mConnection.getUser());
-                    LocationMessage location = new LocationMessage(mAccountInfo.objectid, next.getX(), next.getY(), 3.1415927);
+                    LocationPacketExtension location = new LocationPacketExtension(mAccountInfo.objectid, next.getX(), next.getY(), 3.1415927);
                     toSend.addExtension(location);
                     try {
                         mConnection.sendPacket(toSend);

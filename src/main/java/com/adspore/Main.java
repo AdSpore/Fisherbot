@@ -1,6 +1,7 @@
 package com.adspore;
 
 import org.jivesoftware.smack.SmackConfiguration;
+import org.jivesoftware.smack.SmackException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -46,6 +47,14 @@ public class Main {
             finished.await();
         } catch (InterruptedException e) {
             LOG.warn("Should not be getting interrupted");
+        }
+
+        bot.removeAccount();
+
+        try {
+            helper.mConnection.disconnect();
+        } catch (SmackException.NotConnectedException e) {
+            LOG.error("NOT CONNECTED EXCEPTION", e);
         }
     }
 
