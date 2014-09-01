@@ -36,7 +36,7 @@ public class LocationPacketExtension implements PacketExtension {
     @Override
     public CharSequence toXML() {
         StringBuffer sb = new StringBuffer();
-        sb.append("<userlocation>");
+        sb.append("<userlocation xmlns=\"http://adspore.com/v1/lighthouse\">");
 
         sb.append("<objectid>");
         sb.append(String.valueOf(objectid));
