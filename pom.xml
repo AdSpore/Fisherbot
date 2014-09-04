@@ -8,6 +8,23 @@
     <artifactId>Fisherman</artifactId>
     <version>1.1-SNAPSHOT</version>
 
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>fully.qualified.MainClass</mainClass>
+                        </manifest>
+                    </archive>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
     <properties>
         <slf4j.version>1.7.7</slf4j.version>
@@ -100,15 +117,6 @@
             <artifactId>gt-main</artifactId>
             <version>${geotools.version}</version>
         </dependency>
-
-        <!--
-        <dependency>
-            <groupId>org.geotools</groupId>
-            <artifactId>geotools</artifactId>
-            <version>${geotools.version}</version>
-        </dependency>
-        -->
-        
 
     </dependencies>
 </project>
