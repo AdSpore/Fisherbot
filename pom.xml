@@ -30,40 +30,36 @@
 
 
     <repositories>
-        <!--
-        <repository>
-            <id>sonotype</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-        </repository>
-        -->
-        
-        <repository>
-            <id>local_nexus</id>
-            <url>http://minimac.adspore.com:8081/nexus/content/repositories/snapshots</url>
-        </repository>
-
         <repository>
             <id>maven2-repository.dev.java.net</id>
             <name>Java.net repository</name>
             <url>http://download.java.net/maven/2</url>
         </repository>
-
         <repository>
             <id>osgeo</id>
             <name>Open Source Geospatial Foundation Repository</name>
             <url>http://download.osgeo.org/webdav/geotools/</url>
         </repository>
-
-
         <repository>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-            <id>opengeo</id>
-            <name>OpenGeo Maven Repository</name>
-            <url>http://repo.opengeo.org</url>
+            <id>EclipseLink Repo</id>
+            <url>http://download.eclipse.org/rt/eclipselink/maven.repo</url>
         </repository>
-
+        <repository>
+            <id>adspore-private</id>
+            <url>http://minimac.adspore.com:8081/nexus/content/repositories/adspore-private/</url>
+        </repository>
+        <repository>
+            <id>adspore-central</id>
+            <url>http://minimac.adspore.com:8081/nexus/content/repositories/central/</url>
+        </repository>
+        <repository>
+            <id>adspore-snapshots</id>
+            <url>http://minimac.adspore.com:8081/nexus/content/repositories/snapshots/</url>
+        </repository>
+        <repository>
+            <id>adspore-releases</id>
+            <url>http://minimac.adspore.com:8081/nexus/content/repositories/releases/</url>
+        </repository>
     </repositories>
 
 
