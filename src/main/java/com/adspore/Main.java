@@ -13,12 +13,16 @@ public class Main {
 
     public static final String SERVICE = "lighthouse.seattle1.adspore.com";
     public static final String ADSPORE_NAMESPACE = "http://adspore.com/v1/lighthouse";
-    public static final int WANDER_STEP_COUNT = 20;
+    public static int WANDER_STEP_COUNT = 20;
 
 
     public static void main(String[] args) {
         SmackConfiguration.DEBUG_ENABLED = true;
 
+        if (null != args && args.length > 0) {
+            WANDER_STEP_COUNT = Integer.parseInt(args[0]);
+        }
+        
         ConnectionHelper helper = new ConnectionHelper();
 
         Bot bot = Bot.createRandomBot(helper.mConnection);
