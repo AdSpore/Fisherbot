@@ -101,18 +101,14 @@
             <version>${geotools.version}</version>
         </dependency>
 
+        <!--
         <dependency>
             <groupId>org.geotools</groupId>
             <artifactId>geotools</artifactId>
             <version>${geotools.version}</version>
         </dependency>
-        <!--
-        <dependency>
-            <groupId>org.igniterealtime</groupId>
-            <artifactId>tinder</artifactId>
-            <version>1.2.4-SNAPSHOT</version>
-        </dependency>
         -->
+        
 
     </dependencies>
 </project>
